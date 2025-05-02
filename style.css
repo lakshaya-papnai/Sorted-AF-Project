@@ -1,0 +1,300 @@
+/* Reset and Full Viewport */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(-45deg, #4994bc 5%, #203a43 33%, #2c5364 66%, #0f2027 100%);
+  background-size: 400% 400%;
+  animation: gradientMove 10s ease infinite;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Gradient Animation */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* App Container Styling */
+#app-container {
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  width: 95vw;
+  padding: 2rem;
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Header Styles */
+header {
+  text-align: center;
+  margin-bottom: 1rem;
+  z-index: 2;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: hsl(51, 100%, 60%);
+  animation: bounce 1s ease;
+}
+
+@keyframes bounce {
+  0% { transform: scale(0.8); opacity: 0; }
+  60% { transform: scale(1.05); opacity: 1; }
+  80% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+p {
+  font-size: 1.1rem;
+  color: inherit;
+}
+
+/* Controls Styling */
+#controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  z-index: 2;
+}
+
+button {
+  font-family: 'Poppins', sans-serif;
+  padding: 0.75rem 1.7rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: hsl(0, 0%, 100%);
+  border-radius: 40px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 4px rgba(185, 200, 91, 0.2);
+}
+
+button:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+}
+
+button:active {
+  transform: translateY(0) scale(1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  border: none;
+}
+
+button:disabled {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: #ccc;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+  transform: none !important;
+  opacity: 0.6;
+}
+
+select {
+  appearance: none;
+  background: linear-gradient(45deg, #3a3a3a, #676666);
+  border: none;
+  color: hsl(0, 0%, 100%);
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-family: Verdana, sans-serif;
+  border-radius: 15px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(212, 225, 122, 0.2);
+  z-index: 2;
+}
+
+select:focus {
+  outline: none;
+}
+
+select option {
+  background-color: #3a3a3a;
+  color: #fff;
+  padding: 0.75rem;
+  font-family: Verdana, sans-serif;
+}
+
+input[type="range"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 150px;
+  height: 6px;
+  border-radius: 5px;
+  background: #555;
+  outline: none;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+  cursor: pointer;
+}
+
+input[type="range"]:hover {
+  opacity: 1;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ffd700;
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ffd700;
+  cursor: pointer;
+}
+
+label {
+  font-size: 1rem;
+  margin-right: 0.5rem;
+}
+
+/* Speed Value Display */
+#speed-value {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffd700;
+  margin-left: 8px;
+}
+
+/* Card Container */
+#card-container {
+  position: relative;
+  margin-top: 2rem;
+  margin-bottom: 0.8rem;
+  height: 250px;
+  z-index: 2;
+}
+
+/* Card Styles */
+.card {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 9px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  width: 80px;
+  height: 120px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  transition: transform 0.3s ease, left 0.33s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
+  font-family: 'Georgia', serif;
+  color: #000;
+}
+
+.card:hover {
+  transform: translateY(-60%) scale(1.05);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+.card[data-suit="♥"],
+.card[data-suit="♦"] {
+  color: rgba(255, 0, 0, 0.801);
+}
+
+.card::before {
+  content: attr(data-value) " " attr(data-suit);
+  font-size: 0.9rem;
+  font-weight: bold;
+  align-self: flex-start;
+  text-align: left;
+}
+
+.card::after {
+  content: attr(data-value) " " attr(data-suit);
+  font-size: 0.9rem;
+  font-weight: bold;
+  align-self: flex-end;
+  text-align: right;
+  transform: rotate(180deg);
+}
+
+.card span {
+  font-size: 2.5rem;
+  line-height: 1;
+  z-index: 1;
+}
+
+.card.sorted {
+  border-color: #32c864;
+  box-shadow: 0 0 10px 3px rgba(50, 200, 100, 0.6);
+}
+
+.card.active {
+  border: 2px solid #ffd700;
+  box-shadow: 0 0 15px gold;
+}
+
+.card.pivot {
+  border: 2px dashed orange;
+  box-shadow: 0 0 10px 5px rgba(255, 165, 0, 0.8);
+}
+
+.flip {
+  animation: flipAnimation 0.6s ease-in-out;
+}
+
+@keyframes flipAnimation {
+  from { transform: translateY(-50%) rotateY(0deg); }
+  to { transform: translateY(-50%) rotateY(360deg); }
+}
+
+.flip-quick {
+  animation: flipQuickAnimation 0.6s ease-in-out;
+}
+
+@keyframes flipQuickAnimation {
+  0% { transform: translateY(-50%) rotateY(0deg) scale(1); }
+  50% { transform: translateY(-50%) rotateY(180deg) scale(1.1); }
+  100% { transform: translateY(-50%) rotateY(360deg) scale(1); }
+}
+
+#congratulations-message {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 1.5rem;
+  color: #66bb6a;
+  display: none;
+  z-index: 2;
+}
+
+footer {
+  margin-top: auto;
+  text-align: center;
+  font-size: 0.9rem;
+  color: inherit;
+  padding: 10px 0;
+  z-index: 2;
+}

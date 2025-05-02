@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Sorted AF</title>
+    <!-- Google Font: Poppins -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="app-container">
+      <header>
+        <h1>Sorted AF (as fun)</h1>
+        <p>It's not magic, it's JavaScript.</p>
+      </header>
+
+      <div id="controls">
+        <button id="start-button">Sort</button>
+        <button id="shuffle-button">Shuffle</button>
+        <select id="algo">
+          <option value="bubble">Bubble Sort</option>
+          <option value="selection">Selection Sort</option>
+          <option value="insertion">Insertion Sort</option>
+          <option value="quick">Quick Sort</option>
+        </select>
+        <label for="speed">Speed:</label>
+       
+        <input type="range" id="speed" min="1" max="5" step="1" value="3" />
+        <span id="speed-value">3</span>
+      </div>
+
+      <!-- Cards container -->
+      <div id="card-container"></div>
+      <!-- Congratulations message -->
+      <div id="congratulations-message"></div>
+
+      <footer>
+        Crafted with JavaScript | © 2025 Lakshaya Papnai
+      </footer>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="shuffle-sound" src="shuffling.mp3" preload="auto"></audio>
+    <audio id="placed-sound" src="placed.mp3" preload="auto"></audio>
+    <audio id="win-music" src="win.mp3" preload="auto"></audio>
+    <audio id="swap-sound" src="swap.mp3" preload="auto"></audio>
+
+    <script src="script.js"></script>
+  </body>
+</html>
