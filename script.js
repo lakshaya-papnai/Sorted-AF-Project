@@ -55,7 +55,6 @@ function init() {
   shuffleBtn.addEventListener("click", shuffleCards);
 
   startBtn.addEventListener("click", async () => {
-    // If already sorted, reshuffle first
     if (areCardsSorted()) {
       shuffleCards();
       await delay(600);
@@ -92,18 +91,15 @@ async function bubbleSort() {
           const cardA = cards[j];
           const cardB = cards[j + 1];
 
-          // highlight comparing
           cardA.element.classList.add("active");
           cardB.element.classList.add("active");
 
           setTimeout(() => {
-            // if out of order, swap
             if (cardA.rank > cardB.rank) {
               cardA.element.classList.add("flip");
               cardB.element.classList.add("flip");
               [cards[j], cards[j + 1]] = [cards[j + 1], cards[j]];
 
-              // play swap sound
               const swapSound = document.getElementById("swap-sound");
               if (swapSound) {
                 swapSound.currentTime = 0;
@@ -118,7 +114,6 @@ async function bubbleSort() {
               }, 600);
             }
 
-            // remove comparing highlight
             cardA.element.classList.remove("active");
             cardB.element.classList.remove("active");
 
@@ -126,7 +121,6 @@ async function bubbleSort() {
             setTimeout(step, getDelay());
           }, getDelay());
         } else {
-          // mark sorted
           cards[len - i - 1].element.classList.add("sorted");
           const placedSound = document.getElementById("placed-sound");
           if (placedSound) {
@@ -138,7 +132,6 @@ async function bubbleSort() {
           setTimeout(step, getDelay());
         }
       } else {
-        // all sorted
         cards.forEach(c => c.element.classList.add("sorted"));
         const winMusic = document.getElementById("win-music");
         if (winMusic) winMusic.play();
@@ -165,12 +158,10 @@ async function selectionSort() {
 
         function innerLoop() {
           if (j < len) {
-            // highlight comparing
             cards[j].element.classList.add("active");
             cards[minIndex].element.classList.add("active");
 
             setTimeout(() => {
-              // remove highlight
               cards[j].element.classList.remove("active");
               cards[minIndex].element.classList.remove("active");
 
@@ -181,7 +172,6 @@ async function selectionSort() {
               setTimeout(innerLoop, getDelay());
             }, getDelay());
           } else {
-            // swap if needed
             if (minIndex !== i) {
               cards[i].element.classList.add("flip");
               cards[minIndex].element.classList.add("flip");
@@ -198,20 +188,16 @@ async function selectionSort() {
               setTimeout(() => {
                 cards[i].element.classList.remove("flip");
                 cards[minIndex].element.classList.remove("flip");
-
-                // mark placed
                 cards[i].element.classList.add("sorted");
                 const placedSound = document.getElementById("placed-sound");
                 if (placedSound) {
                   placedSound.currentTime = 0;
                   placedSound.play();
                 }
-
                 i++;
                 setTimeout(outerLoop, getDelay());
               }, 600);
             } else {
-              // no swap, just mark sorted
               cards[i].element.classList.add("sorted");
               const placedSound = document.getElementById("placed-sound");
               if (placedSound) {
@@ -223,10 +209,8 @@ async function selectionSort() {
             }
           }
         }
-
         innerLoop();
       } else {
-        // all sorted
         cards.forEach(c => c.element.classList.add("sorted"));
         const winMusic = document.getElementById("win-music");
         if (winMusic) winMusic.play();
@@ -234,7 +218,6 @@ async function selectionSort() {
         resolve();
       }
     }
-
     outerLoop();
   });
 }
@@ -253,7 +236,6 @@ async function insertionSort() {
 
         function innerLoop() {
           if (j > 0 && cards[j].rank < cards[j - 1].rank) {
-            // highlight
             cards[j].element.classList.add("active");
             cards[j - 1].element.classList.add("active");
 
@@ -261,7 +243,6 @@ async function insertionSort() {
               cards[j].element.classList.remove("active");
               cards[j - 1].element.classList.remove("active");
 
-              // swap
               cards[j].element.classList.add("flip");
               cards[j - 1].element.classList.add("flip");
               [cards[j], cards[j - 1]] = [cards[j - 1], cards[j]];
@@ -286,10 +267,8 @@ async function insertionSort() {
             setTimeout(outerLoop, getDelay());
           }
         }
-
         innerLoop();
       } else {
-        // complete
         cards.forEach(c => c.element.classList.add("sorted"));
         const winMusic = document.getElementById("win-music");
         if (winMusic) winMusic.play();
@@ -297,7 +276,6 @@ async function insertionSort() {
         resolve();
       }
     }
-
     outerLoop();
   });
 }
@@ -393,10 +371,22 @@ function updateCardPositions() {
   const totalCards    = window.cards.length;
   if (!totalCards) return;
 
-  const cardWidth = window.cards[0].element.offsetWidth;
-  const gap       = 12;
-  const totalReq  = totalCards * cardWidth + (totalCards - 1) * gap;
-  const baseOffset= (cardContainer.offsetWidth - totalReq) / 2;
+  // Mobile: flex reordering
+  const isMobile = window.innerWidth <= 480;
+  if (isMobile) {
+    window.cards.forEach((c, idx) => {
+      c.element.style.order = idx;
+      c.element.style.left  = 'auto';
+      c.element.style.top   = 'auto';
+    });
+    return;
+  }
+
+  // Desktop: absolute positioning
+  const cardWidth    = window.cards[0].element.offsetWidth;
+  const gap          = 12;
+  const totalReq     = totalCards * cardWidth + (totalCards - 1) * gap;
+  const baseOffset   = Math.max((cardContainer.offsetWidth - totalReq) / 2, 0);
 
   window.cards.forEach((c, idx) => {
     const leftPos = baseOffset + idx * (cardWidth + gap);
@@ -429,7 +419,6 @@ function areCardsSorted() {
 
 function getDelay() {
   const s = parseInt(document.getElementById("speed").value, 10);
-  // s=1→2000ms, 2→1600, 3→1200, 4→800, 5→400
   return 2400 - 400 * s;
 }
 

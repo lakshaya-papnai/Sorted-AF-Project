@@ -332,35 +332,79 @@ footer {
     padding: 6px;
   }
 }
-
 /* Responsive: Mobile */
 @media (max-width: 480px) {
+  /* Container & Typography */
   #app-container {
     padding: 0.5rem;
   }
-  h1 {
+
+  header h1 {
     font-size: 1.5rem;
   }
-  p {
+
+  header p {
     font-size: 0.9rem;
   }
+
+  /* Controls: stack vertically & full width */
+  #controls {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  #controls > * {
+    width: 100%;
+    text-align: center;
+  }
+
   button {
     padding: 0.6rem 1rem;
     font-size: 0.9rem;
   }
+
   select {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
   }
+
+  label, #speed-value {
+    font-size: 0.9rem;
+  }
+
   input[type="range"] {
     width: 80px;
   }
+
+  /* Card container: flex-wrap for multiple rows */
   #card-container {
-    height: 150px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    padding: 1rem 0;
+    position: static;
   }
+
+  /* Cards: static flow, tighter sizing */
   .card {
+    position: static;
+    top: auto;
+    transform: none;
     width: 50px;
     height: 70px;
     padding: 4px;
+    margin: 5px;
+  }
+
+  /* Corner labels smaller */
+  .card::before,
+  .card::after {
+    font-size: 0.6rem;
+  }
+
+  /* Center suit icon smaller */
+  .card span {
+    font-size: 1.4rem;
   }
 }
