@@ -21,7 +21,7 @@ function init() {
     suit: suits[idx % suits.length],
     rank: rankInfo.rank
   }));
-  shuffleArray(cardData);
+  shuffleArray(cardData); //using fisher yates algo
 
   // Create DOM cards
   const cardContainer = document.getElementById("card-container");
@@ -30,16 +30,16 @@ function init() {
   cardData.forEach(c => {
     const cardEl = document.createElement("div");
     cardEl.classList.add("card");
-    cardEl.setAttribute("data-value", c.value);
-    cardEl.setAttribute("data-suit", c.suit);
+    cardEl.setAttribute("data-value", c.value); //will be passed to css to change card data
+    cardEl.setAttribute("data-suit", c.suit);   //same
     cardEl.innerHTML = `<span>${c.suit}</span>`;
-    cardContainer.appendChild(cardEl);
-    window.cards.push({ element: cardEl, rank: c.rank });
+    cardContainer.appendChild(cardEl);     //adding a single card to whole card container
+    window.cards.push({ element: cardEl, rank: c.rank }); 
   });
 
-  // Stack them, then fan out
-  setCardsAsDeck();
-  setTimeout(updateCardPositions, 1500);
+  
+  setCardsAsDeck(); // Stack them on top of each other
+  setTimeout(updateCardPositions, 1500); // then fan out after 1.5 secs
 
   // Controls
   const shuffleBtn = document.getElementById("shuffle-button");
@@ -417,9 +417,15 @@ function areCardsSorted() {
   return window.cards.every(c => c.element.classList.contains("sorted"));
 }
 
-function getDelay() {
+function getDelay() {   //gets time delay from speed slider b/w 2 cards swapping 
   const s = parseInt(document.getElementById("speed").value, 10);
-  return 2400 - 400 * s;
+  if(s==1) return 700;
+  else if(s==2) return 600;
+  else if(s==3) return 500;
+  else if(s==4) return 300
+  else if(s==5) return 100;
+
+   return  400; //default
 }
 
 function showCongratulations(message) {
