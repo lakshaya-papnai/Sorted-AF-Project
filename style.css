@@ -1,9 +1,9 @@
-/* Reset and Full Viewport */
+/* Reset & allow scrolling */
 html, body {
   margin: 0;
   padding: 0;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
+  overflow: auto;
 }
 
 body {
@@ -15,12 +15,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 1rem 0;
 }
 
-/* Gradient Animation */
 @keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
@@ -28,15 +28,13 @@ body {
 #app-container {
   display: flex;
   flex-direction: column;
-  height: 90vh;
   width: 95vw;
+  max-width: 1400px;
   padding: 2rem;
   background-color: #1e1e1e;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
   box-sizing: border-box;
-  position: relative;
-  overflow: hidden;
 }
 
 /* Header Styles */
@@ -48,16 +46,16 @@ header {
 
 h1 {
   font-size: 2.5rem;
-  font-weight: 700;
+  font-weight: 800;
   margin-bottom: 0.5rem;
   color: hsl(51, 100%, 60%);
   animation: bounce 1s ease;
 }
 
 @keyframes bounce {
-  0% { transform: scale(0.8); opacity: 0; }
-  60% { transform: scale(1.05); opacity: 1; }
-  80% { transform: scale(0.95); }
+  0%   { transform: scale(0.8); opacity: 0; }
+  60%  { transform: scale(1.05); opacity: 1; }
+  80%  { transform: scale(0.95); }
   100% { transform: scale(1); }
 }
 
@@ -81,29 +79,29 @@ button {
   padding: 0.75rem 1.7rem;
   font-size: 1.1rem;
   font-weight: 600;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255,255,255,0.1);
   backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: hsl(0, 0%, 100%);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: hsl(0,0%,100%);
   border-radius: 40px;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.3s ease;
-  box-shadow: 0 2px 4px rgba(185, 200, 91, 0.2);
+  box-shadow: 0 2px 4px rgba(185,200,91,0.2);
 }
 
 button:hover {
   transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 8px rgba(255,255,255,0.2);
 }
 
 button:active {
   transform: translateY(0) scale(1);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
   border: none;
 }
 
 button:disabled {
-  background-color: rgba(255, 255, 255, 0.1) !important;
+  background-color: rgba(255,255,255,0.1) !important;
   color: #ccc;
   cursor: not-allowed !important;
   box-shadow: none !important;
@@ -115,13 +113,13 @@ select {
   appearance: none;
   background: linear-gradient(45deg, #3a3a3a, #676666);
   border: none;
-  color: hsl(0, 0%, 100%);
+  color: #fff;
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
   font-family: Verdana, sans-serif;
   border-radius: 15px;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(212, 225, 122, 0.2);
+  box-shadow: 0 2px 4px rgba(212,225,122,0.2);
   z-index: 2;
 }
 
@@ -198,7 +196,7 @@ label {
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 9px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
   width: 80px;
   height: 120px;
   position: absolute;
@@ -209,19 +207,22 @@ label {
   justify-content: space-between;
   align-items: center;
   padding: 8px;
-  transition: transform 0.3s ease, left 0.33s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
+  transition:
+    transform 0.3s ease,
+    left 0.33s cubic-bezier(0.4,0,0.2,1),
+    box-shadow 0.2s ease;
   font-family: 'Georgia', serif;
   color: #000;
 }
 
 .card:hover {
   transform: translateY(-60%) scale(1.05);
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 10px rgba(0,0,0,0.3);
 }
 
 .card[data-suit="♥"],
 .card[data-suit="♦"] {
-  color: rgba(255, 0, 0, 0.801);
+  color: rgba(255,0,0,0.801);
 }
 
 .card::before {
@@ -249,7 +250,7 @@ label {
 
 .card.sorted {
   border-color: #32c864;
-  box-shadow: 0 0 10px 3px rgba(50, 200, 100, 0.6);
+  box-shadow: 0 0 10px 3px rgba(50,200,100,0.6);
 }
 
 .card.active {
@@ -259,7 +260,7 @@ label {
 
 .card.pivot {
   border: 2px dashed orange;
-  box-shadow: 0 0 10px 5px rgba(255, 165, 0, 0.8);
+  box-shadow: 0 0 10px 5px rgba(255,165,0,0.8);
 }
 
 .flip {
@@ -268,7 +269,7 @@ label {
 
 @keyframes flipAnimation {
   from { transform: translateY(-50%) rotateY(0deg); }
-  to { transform: translateY(-50%) rotateY(360deg); }
+  to   { transform: translateY(-50%) rotateY(360deg); }
 }
 
 .flip-quick {
@@ -276,11 +277,12 @@ label {
 }
 
 @keyframes flipQuickAnimation {
-  0% { transform: translateY(-50%) rotateY(0deg) scale(1); }
-  50% { transform: translateY(-50%) rotateY(180deg) scale(1.1); }
+  0%   { transform: translateY(-50%) rotateY(0deg) scale(1); }
+  50%  { transform: translateY(-50%) rotateY(180deg) scale(1.1); }
   100% { transform: translateY(-50%) rotateY(360deg) scale(1); }
 }
 
+/* Congratulations Message */
 #congratulations-message {
   margin-top: 2rem;
   text-align: center;
@@ -290,6 +292,7 @@ label {
   z-index: 2;
 }
 
+/* Footer */
 footer {
   margin-top: auto;
   text-align: center;
@@ -297,4 +300,67 @@ footer {
   color: inherit;
   padding: 10px 0;
   z-index: 2;
+}
+
+/* Responsive: Tablet */
+@media (max-width: 768px) {
+  #app-container {
+    padding: 1rem;
+  }
+  h1 {
+    font-size: 2rem;
+  }
+  p {
+    font-size: 1rem;
+  }
+  #controls {
+    gap: 1rem;
+  }
+  #controls > * {
+    flex: 1 1 100%;
+    text-align: center;
+  }
+  input[type="range"] {
+    width: 120px;
+  }
+  #card-container {
+    height: 200px;
+  }
+  .card {
+    width: 60px;
+    height: 90px;
+    padding: 6px;
+  }
+}
+
+/* Responsive: Mobile */
+@media (max-width: 480px) {
+  #app-container {
+    padding: 0.5rem;
+  }
+  h1 {
+    font-size: 1.5rem;
+  }
+  p {
+    font-size: 0.9rem;
+  }
+  button {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+  select {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+  input[type="range"] {
+    width: 80px;
+  }
+  #card-container {
+    height: 150px;
+  }
+  .card {
+    width: 50px;
+    height: 70px;
+    padding: 4px;
+  }
 }
