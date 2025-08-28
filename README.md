@@ -1,5 +1,5 @@
 # Sorted AF
-
+![Udaan Application Screenshot](image2.png)
 **Sorted AF (as fun)** is an interactive, animated sorting visualizer built with HTML, CSS, and JavaScript. This project demonstrates multiple sorting algorithms—such as Bubble Sort, Selection Sort, Insertion Sort, and Quick Sort—with smooth animations and sound effects. It's designed not only to illustrate the inner workings of these algorithms but also to showcase creative web development skills.
 
 ## Features
